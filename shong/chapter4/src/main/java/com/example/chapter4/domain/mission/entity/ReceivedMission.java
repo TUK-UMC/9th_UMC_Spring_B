@@ -7,9 +7,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * 사용자가 받은 미션의 진행 상태를 나타내는 엔티티입니다.
- */
+
+//사용자가 받은 미션의 진행 상태를 나타내는 엔티티입니다.
+
 @Entity
 @Table(name = "received_mission") // DB 테이블명을 'received_mission'으로 명시적으로 지정
 @Getter

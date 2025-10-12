@@ -1,6 +1,6 @@
 package com.example.chapter4.domain.member.entity;
 
-import com.example.chapter4.domain.member.entity.Alarm;
+import com.example.chapter4.domain.Alarm.entity.Alarm;
 import com.example.chapter4.global.entity.BaseEntity;
 import com.example.chapter4.domain.mission.entity.ReceivedMission;
 import com.example.chapter4.domain.review.entity.Review;

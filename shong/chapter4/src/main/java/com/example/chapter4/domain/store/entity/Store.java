@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 가게 정보를 나타내는 엔티티입니다.
- */
+
+// 가게 정보를 나타내는 엔티티입니다.
+
 @Entity
 @Getter
 @Builder

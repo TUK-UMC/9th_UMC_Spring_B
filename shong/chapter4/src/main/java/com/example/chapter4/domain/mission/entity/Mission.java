@@ -10,9 +10,9 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 가게에서 제공하는 미션 정보를 나타내는 엔티티입니다.
- */
+
+//가게에서 제공하는 미션 정보를 나타내는 엔티티입니다.
+
 @Entity
 @Getter
 @Builder

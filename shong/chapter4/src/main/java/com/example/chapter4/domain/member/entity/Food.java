@@ -3,14 +3,13 @@ package com.example.chapter4.domain.member.entity;
 import com.example.chapter4.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 회원이 선호하는 음식 종류(카테고리) 정보를 나타내는 엔티티입니다.
- * 회원의 취향을 관리하는 member 도메인에 포함됩니다.
- */
+
+// 회원이 선호하는 음식 종류(카테고리) 정보를 나타내는 엔티티입니다.
+// 회원의 취향을 관리하는 member 도메인에 포함됩니다.
+
 @Entity
 @Getter
 @Builder

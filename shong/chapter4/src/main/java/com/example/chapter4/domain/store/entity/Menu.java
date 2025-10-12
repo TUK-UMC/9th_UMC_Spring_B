@@ -8,9 +8,9 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 가게의 메뉴 정보를 나타내는 엔티티입니다.
- */
+
+// 가게의 메뉴 정보를 나타내는 엔티티입니다.
+
 @Entity
 @Getter
 @Builder

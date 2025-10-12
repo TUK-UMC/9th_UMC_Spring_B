@@ -1,12 +1,10 @@
-package com.example.chapter4.domain.member.entity;
+package com.example.chapter4.domain.Alarm.entity;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 
-/**
- * 리뷰 관련 알림의 상세 내용을 담는 엔티티입니다.
- */
+// 리뷰 관련 알림의 상세 내용을 담는 엔티티.
 @Entity
 @Table(name = "review_alarm")
 @Getter
@@ -25,8 +23,8 @@ public class ReviewAlarm {
     @Column(columnDefinition = "TEXT")
     private String body;
 
-    // ReviewAlarm은 상위 알림(Alarm)에 속합니다. (1:1 관계, FK 보유)
-    @OneToOne(fetch = FetchType.LAZY)
+    // 여러개의 리뷰알림(ReviewAlarm)이 하나의 알림(Alarm)에 속함
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "alarm_id")
     private Alarm alarm;
 
