@@ -1,5 +1,9 @@
-package com.example.umc9th.domain;
+package com.example.umc9th.domain.User;
 
+import com.example.umc9th.domain.Notice.Notice;
+import com.example.umc9th.domain.PersonalMission.PersonalMission;
+import com.example.umc9th.domain.PreferenceFood.PreferenceFood;
+import com.example.umc9th.domain.Reivew.Review;
 import jakarta.persistence.*;
 import java.util.*;
 

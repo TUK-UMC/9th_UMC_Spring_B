@@ -1,5 +1,6 @@
-package com.example.umc9th.domain;
+package com.example.umc9th.domain.Mission;
 
+import com.example.umc9th.domain.Store.Store;
 import jakarta.persistence.*;
 
 @Entity

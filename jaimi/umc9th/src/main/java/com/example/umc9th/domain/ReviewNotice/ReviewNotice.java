@@ -1,5 +1,7 @@
-package com.example.umc9th.domain;
+package com.example.umc9th.domain.ReviewNotice;
 
+import com.example.umc9th.domain.Notice.Notice;
+import com.example.umc9th.domain.Reivew.Review;
 import jakarta.persistence.*;
 
 @Entity

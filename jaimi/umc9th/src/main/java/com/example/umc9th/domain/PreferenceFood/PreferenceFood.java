@@ -1,5 +1,7 @@
-package com.example.umc9th.domain;
+package com.example.umc9th.domain.PreferenceFood;
 
+import com.example.umc9th.domain.Category.Category;
+import com.example.umc9th.domain.User.User;
 import jakarta.persistence.*;
 
 @Entity

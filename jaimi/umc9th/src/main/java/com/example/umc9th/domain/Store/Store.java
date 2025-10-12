@@ -1,5 +1,7 @@
-package com.example.umc9th.domain;
+package com.example.umc9th.domain.Store;
 
+import com.example.umc9th.domain.Menu.Menu;
+import com.example.umc9th.domain.Mission.Mission;
 import jakarta.persistence.*;
 import java.util.*;
 
