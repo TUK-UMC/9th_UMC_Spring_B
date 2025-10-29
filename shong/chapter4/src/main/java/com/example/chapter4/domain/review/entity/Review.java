@@ -46,4 +46,15 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
+    public static Review createReview(Member member, Menu menu, Float rating, String content, String photo) {
+        return Review.builder()
+                .member(member)
+                .menu(menu)
+                .rating(rating)
+                .content(content)
+                .photo(photo)
+                .status("ACTIVE") // 기본값 설정
+                .build();
+    }
+
 }
