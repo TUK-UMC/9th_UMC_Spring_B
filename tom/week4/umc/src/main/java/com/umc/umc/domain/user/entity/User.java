@@ -27,6 +27,9 @@ public class User extends BaseEntity {
     @Column(name = "name", nullable = false, length = 20)
     private String name;
 
+    @Column(name = "email", nullable = false, length = 30)
+    private String email;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
@@ -36,6 +39,9 @@ public class User extends BaseEntity {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @Column(name = "phoneNumber", nullable = false)
+    private String phoneNumber;
 
     private Integer point;
 

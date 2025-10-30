@@ -6,11 +6,13 @@ import com.umc.umc.global.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Review extends BaseEntity {
 
@@ -35,4 +37,14 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
+
+    public static Review createReview(User user, Store store, String title, Double rating, String content) {
+        Review review = new Review();
+        review.setUser(user);
+        review.setStore(store);
+        review.setTitle(title);
+        review.setRate(rating);
+        review.setContent(content);
+        return review;
+    }
 }
