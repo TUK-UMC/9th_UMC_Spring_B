@@ -1,22 +1,42 @@
 package com.example.chapter4.domain.mission.entity;
 
+
+import com.example.chapter4.global.entity.BaseEntity;
+import com.example.chapter4.domain.mission.entity.ReceivedMission;
+import com.example.chapter4.domain.store.entity.Store;
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+//가게에서 제공하는 미션 정보를 나타내는 엔티티입니다.
 
 @Entity
-@Table(name = "Mission")
-public class Mission {
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Mission extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean status;
-
     @Column(length = 100)
     private String description;
 
-    private Long storeId;
+    @Column(nullable = false, length = 30)
+    private String title;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    // Mission은 하나의 Store에 속한다. (N:1 관계)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+    // Mission은 여러개의 ReceivedMission을 가질 수 있다. (1:N 관계)
+    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
+    private List<ReceivedMission> receivedMissionList = new ArrayList<>();
+
 }
