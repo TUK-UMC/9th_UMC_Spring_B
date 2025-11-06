@@ -34,6 +34,7 @@ public class ReviewRepositoryQueryDslImpl implements ReviewRepositoryQueryDsl {
                         review.rate,
                         review.createTime))
                 .from(review)
+                .join(review.store, store)
                 .where(
                         user.id.eq(userId), // 내가 쓴 리뷰
                         storeNameEq(cond.getStoreName()), // 가게 이름(값이 있는 경우에만)

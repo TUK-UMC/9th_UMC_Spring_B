@@ -8,9 +8,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -1,4 +1,4 @@
-package com.umc.umc.domain.mission.respository;
+package com.umc.umc.domain.mission.repository;
 
 import com.umc.umc.domain.mission.dto.OngoingMissionDto;
 import com.umc.umc.domain.mission.entity.MissionStatus;
