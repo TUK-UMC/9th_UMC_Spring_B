@@ -32,6 +32,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRep
     List<MyReviewDTO> findMyReviews(@Param("memberId") Long memberId);
 
     // findMyReviewsDynamic(...) 메서드 선언은
-    // 부모인 ReviewRepositoryCustom에 이미 있으므로
+    // 부모인 ReviewRepositoryCustom에 이미 있으므로햣
     // 여기에 또 적을 필요가 없습니다.
 }
