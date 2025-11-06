@@ -1,8 +1,8 @@
-package com.example.chapter4.domain.review.entity;
+package com.example.chapter6.domain.review.entity;
 
-import com.example.chapter4.global.entity.BaseEntity;
-import com.example.chapter4.domain.member.entity.Member;
-import com.example.chapter4.domain.store.entity.Menu;
+import com.example.chapter6.global.entity.BaseEntity;
+import com.example.chapter6.domain.member.entity.Member;
+import com.example.chapter6.domain.store.entity.Menu;
 import jakarta.persistence.*;
 import lombok.*;
 
