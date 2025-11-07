@@ -1,17 +1,21 @@
+package com.example.chapter4.domain.review.service;
+
+import com.example.chapter4.domain.review.dto.MyReviewDto;
+import com.example.chapter4.domain.review.repository.ReviewQueryDslRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import com.example.chapter4.domain.review.entity.Review; // Review 엔티티 임포트
-import com.example.chapter4.domain.review.repository.ReviewQueryDslRepository; // QueryDSL 커스텀 레포지토리 임포트
 
 @Service
 public class ReviewService {
-    private final ReviewQueryDslRepository reviewRepository;
+    private final ReviewQueryDslRepository reviewQueryDslRepository;
 
-    public ReviewService(ReviewQueryDslRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
+    public ReviewService(ReviewQueryDslRepository reviewQueryDslRepository) {
+        this.reviewQueryDslRepository = reviewQueryDslRepository;
     }
 
-    public List<Review> getMyReviews(Long memberId, String storeName, Integer starFloor) {
-        return reviewRepository.findMyReviews(memberId, storeName, starFloor);
+    // 내가 작성한 리뷰 조회 (가게/별점 필터 및 페이징)
+    public Page<MyReviewDto> getMyReviews(Long memberId, String storeName, Integer starFloor, Pageable pageable) {
+        return reviewQueryDslRepository.findMyReviews(memberId, storeName, starFloor, pageable);
     }
 }
