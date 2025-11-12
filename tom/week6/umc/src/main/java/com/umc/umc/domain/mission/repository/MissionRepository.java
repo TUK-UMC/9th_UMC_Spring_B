@@ -1,4 +1,4 @@
-package com.umc.umc.domain.mission.respository;
+package com.umc.umc.domain.mission.repository;
 
 import com.umc.umc.domain.mission.dto.AvailableMissionDto;
 import com.umc.umc.domain.mission.entity.Mission;
@@ -19,8 +19,7 @@ public interface MissionRepository extends JpaRepository<Mission,Long> {
                     "SELECT 1 FROM MissionStatus ms " +
                     "WHERE ms.mission = m " +
                     "AND ms.user.id = :userId" +
-                    ") " +
-                    "ORDER BY m.id DESC"
+                    ") "  //Order By 부분을 삭제 (pageable을 이용한 동적 쿼리)
     )
     Page<AvailableMissionDto> findAvailableMissions(
             @Param("regionId") Long regionId,

@@ -2,7 +2,7 @@ package com.umc.umc.domain.review.entity;
 
 import com.umc.umc.domain.store.entity.Store;
 import com.umc.umc.domain.user.entity.User;
-import com.umc.umc.global.BaseEntity;
+import com.umc.umc.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
