@@ -8,15 +8,19 @@ import com.umc.umc.domain.user.enums.Gender;
 import com.umc.umc.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 public class User extends BaseEntity {
 
     @Id
@@ -59,4 +63,15 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private List<PreferenceFood> preferenceFoods = new ArrayList<>();
 
+    @Builder
+    public User(Long id, String name, String email, Gender gender, LocalDate birth, String address, String phoneNumber, Integer point) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+        this.birth = birth;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.point = point;
+    }
 }

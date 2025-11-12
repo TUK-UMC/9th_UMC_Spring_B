@@ -5,6 +5,7 @@ import com.umc.umc.domain.review.entity.Review;
 import com.umc.umc.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -35,4 +36,13 @@ public class Store extends BaseEntity {
 
     @OneToMany(mappedBy = "store")
     private List<Mission> missions = new ArrayList<>();
+
+    @Builder
+    public Store(Long id, String name, String address, String description, Region region) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.region = region;
+    }
 }

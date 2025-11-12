@@ -2,6 +2,7 @@ package com.umc.umc.domain.store.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -19,4 +20,10 @@ public class Region {
 
     @OneToMany(mappedBy = "region")
     private List<Store> stores = new ArrayList<>();
+
+    @Builder
+    public Region(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

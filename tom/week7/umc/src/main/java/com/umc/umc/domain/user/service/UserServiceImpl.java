@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService{
     public Page<MyReviewDto> getMyReviews(Long userId, MyReviewSearchCond cond,  Pageable pageable) {
 
         Page<MyReviewDto> myReviews = reviewRepository.findMyReviews(userId, cond, pageable);
-//        if (myReviews.isEmpty()) {
-//            throw new UserException(GeneralErrorCode.INTERNAL_SERVER_ERROR); // 예외처리 테스트를 위해서 추가
-//        }
+        if (myReviews.isEmpty()) {
+            throw new UserException(GeneralErrorCode.INTERNAL_SERVER_ERROR); // 예외처리 테스트를 위해서 추가
+        }
         return myReviews;
     }
 }
