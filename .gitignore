@@ -1,4 +1,16 @@
 <<<<<<< HEAD
+
+# application.yml 제외
+src/main/resources/applicaton.yml
+src/main/resources/application-*.yml
+
+#apllication.properties 제외
+src/main/resources/application.properties
+src/main/resources/application-*.properties
+
+# 환경변수 파일 제외
+.env
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
