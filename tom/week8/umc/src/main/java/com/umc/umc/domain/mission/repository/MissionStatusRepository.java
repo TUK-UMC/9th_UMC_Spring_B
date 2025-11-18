@@ -1,12 +1,16 @@
 package com.umc.umc.domain.mission.repository;
 
 import com.umc.umc.domain.mission.dto.OngoingMissionDto;
+import com.umc.umc.domain.mission.entity.Mission;
 import com.umc.umc.domain.mission.entity.MissionStatus;
+import com.umc.umc.domain.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
 
 public interface MissionStatusRepository extends JpaRepository<MissionStatus, Long> {
     @Query(
@@ -23,5 +27,7 @@ public interface MissionStatusRepository extends JpaRepository<MissionStatus, Lo
             @Param("status") String status,
             Pageable pageable
     );
+
+    Optional<MissionStatus> findByUserAndMission(User user, Mission mission);
 
 }

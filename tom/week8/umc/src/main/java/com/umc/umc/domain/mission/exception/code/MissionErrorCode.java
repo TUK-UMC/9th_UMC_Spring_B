@@ -10,9 +10,15 @@ import org.springframework.http.HttpStatus;
 public enum MissionErrorCode implements BaseErrorCode {
 
     NOT_FOUND(HttpStatus.NOT_FOUND,
-            "REVIEW404_1",
-            "해당 리뷰를 찾지 못했습니다."),
+            "MISSION404_1",
+            "해당 미션을 찾지 못했습니다."),
+
+    MISSION_ALREADY_CHALLENGED(HttpStatus.INTERNAL_SERVER_ERROR,
+            "MISSION500_1",
+            "이미 완료된 미션입니다.")
     ;
+
+
 
     private final HttpStatus status;
     private final String code;
