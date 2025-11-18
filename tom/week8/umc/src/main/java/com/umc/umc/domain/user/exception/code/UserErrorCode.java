@@ -1,4 +1,4 @@
-package com.umc.umc.domain.review.exception.code;
+package com.umc.umc.domain.user.exception.code;
 
 import com.umc.umc.global.apiPayload.code.BaseErrorCode;
 import lombok.AllArgsConstructor;
@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum ReviewErrorCode implements BaseErrorCode {
+public enum UserErrorCode implements BaseErrorCode {
 
     NOT_FOUND(HttpStatus.NOT_FOUND,
-            "REVIEW404_1",
-            "해당 리뷰를 찾지 못했습니다."),
+            "USER404_1",
+            "해당 사용자를 찾지 못했습니다."),
     ;
 
     private final HttpStatus status;
