@@ -1,26 +1,38 @@
 package com.example.umc9th.domain.review.service;
 
-import com.example.umc9th.domain.review.dto.ReviewResponseDto;
-import com.example.umc9th.domain.review.repository.ReviewRepositoryImpl;
+import com.example.umc9th.domain.store.entity.Store;
+import com.example.umc9th.domain.store.repository.StoreRepository;
+import com.example.umc9th.domain.user.entity.user;
+import com.example.umc9th.domain.user.repository.UserRepository;
+import com.example.umc9th.domain.review.entity.Review;
+import com.example.umc9th.domain.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-// 서비스 계층
-// 비즈니스 로직 담당
-// Controller와 Repository 사이 연결
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class ReviewService {
 
-    private final ReviewRepositoryImpl reviewRepository;
+    private final UserRepository userRepository;
+    private final StoreRepository storeRepository;
+    private final ReviewRepository reviewRepository;
 
-    // 내가 작성한 리뷰 조회
-    public List<ReviewResponseDto> getMyReviews(Long userId, String storeName, Integer starRange) {
-        return reviewRepository.findMyReviews(userId, storeName, starRange);
+    public void addReview(Long storeId, int rating, String content) {
+
+        // 로그인 없음 → userId=1 고정
+        user user = userRepository.findById(1L)
+                .orElseThrow(() -> new RuntimeException("사용자 없음"));
+
+        Store store = storeRepository.findById(request.getStoreId())
+                .orElseThrow(() -> new RuntimeException("가게 없음"));
+
+        Review review = Review.builder()
+                .rating(rating)
+                .content(content)
+                .user(user)
+                .store(store)
+                .build();
+
+        reviewRepository.save(review);
     }
 }

@@ -2,24 +2,34 @@ package com.example.umc9th.domain.mission.entity;
 
 import com.example.umc9th.domain.user.entity.user;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "personal_mission")
 public class PersonalMission {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private user user;  // 미션 수행자
+    @JoinColumn(name = "id1")   // ERD: user.id1
+    private user user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mission_id")
-    private Mission mission;
+    @JoinColumn(name = "id2")   // ERD: mission.id1
+    private mission mission;
 
-    private String progress; // "진행중", "완료" 등 상태값
+    private int time;
+
+    @Builder
+    public PersonalMission(user user, mission mission, int time) {
+        this.user = user;
+        this.mission = mission;
+        this.time = time;
+    }
 }
