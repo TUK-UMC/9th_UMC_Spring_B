@@ -1,6 +1,5 @@
 package com.example.umc9th.domain.mission.service;
 
-import com.example.umc9th.domain.mission.entity.mission;
 import com.example.umc9th.domain.mission.entity.PersonalMission;
 import com.example.umc9th.domain.mission.repository.MissionRepository;
 import com.example.umc9th.domain.mission.repository.PersonalMissionRepository;
