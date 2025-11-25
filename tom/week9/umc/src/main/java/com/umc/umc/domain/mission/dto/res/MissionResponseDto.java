@@ -59,4 +59,15 @@ public class MissionResponseDto {
         private Boolean isFirst;
         private Boolean isLast;
     }
+
+    @Builder
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MissionStatusDto {
+        private Long missionStatusId;
+        private Long missionId;
+        private String status;
+        private LocalDateTime completionTime;
+    }
 }

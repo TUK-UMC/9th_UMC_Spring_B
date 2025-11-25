@@ -7,6 +7,8 @@ import com.umc.umc.domain.mission.dto.res.MissionResponseDto;
 import com.umc.umc.domain.mission.entity.Mission;
 import org.springframework.data.domain.Page;
 
+import java.util.Optional;
+
 public interface MissionService {
     MissionCreateRes createMission(MissionCreateReq request, Long storeId);
 
@@ -15,4 +17,6 @@ public interface MissionService {
     Page<Mission> getMissionList(Long storeId, Integer page);
 
     MissionResponseDto.OnGoingListDto getMyOngoingMission(Long userId, Integer page);
+
+    MissionResponseDto.MissionStatusDto setMissionStatus(Long userId, Long missionId);
 }

@@ -77,4 +77,15 @@ public class MissionController {
         return ApiResponse.success(MissionSuccessCode.FOUND, myOngoingMission);
     }
 
+    @PatchMapping("/{missionId}/complete")
+    @Operation(summary = "진행 중인 미션 완료 API", description = "진행 중인 미션을 완료 상태로 변경합니다.")
+    public ApiResponse<MissionResponseDto.MissionStatusDto> completeMission(
+            @PathVariable Long missionId,
+            @RequestHeader Long userId
+    ) {
+        MissionResponseDto.MissionStatusDto missionStatusDto = missionService.setMissionStatus(missionId, userId);
+
+        return ApiResponse.success(MissionSuccessCode.FOUND, missionStatusDto);
+    }
+
 }

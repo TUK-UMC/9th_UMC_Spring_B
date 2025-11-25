@@ -94,4 +94,13 @@ public class MissionConverter {
                 .build();
     }
 
+    public MissionResponseDto.MissionStatusDto toMissionStatusDto(MissionStatus missionStatus) {
+        return MissionResponseDto.MissionStatusDto.builder()
+                .missionStatusId(missionStatus.getId())
+                .missionId(missionStatus.getMission().getId())
+                .status(missionStatus.getStatus())
+                .completionTime(missionStatus.getUpdateTime())
+                .build();
+    }
+
 }

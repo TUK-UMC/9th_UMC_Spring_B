@@ -32,4 +32,8 @@ public class MissionStatus extends BaseEntity {
         this.mission = mission;
         this.status = status;
     }
+
+    public void setComplete() {
+        this.status = "COMPLETE";
+    }
 }

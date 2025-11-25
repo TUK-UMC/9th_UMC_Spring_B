@@ -91,5 +91,18 @@ public class MissionServiceImpl implements MissionService {
 
     }
 
+    @Override
+    public MissionResponseDto.MissionStatusDto setMissionStatus(Long userId, Long missionId) {
+        MissionStatus missionStatus = missionStatusRepository.findByUserIdAndMissionId(userId, missionId)
+                .orElseThrow(() -> new MissionException(MissionErrorCode.NOT_FOUND));
+
+        if (!"ONGOING".equals(missionStatus.getStatus())) {
+            throw new MissionException(MissionErrorCode.MISSION_ALREADY_CHALLENGED);
+        }
+
+        missionStatus.setComplete();
+        return missionConverter.toMissionStatusDto(missionStatus);
+    }
+
 
 }

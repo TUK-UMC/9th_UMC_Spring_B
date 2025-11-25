@@ -30,5 +30,7 @@ public interface MissionStatusRepository extends JpaRepository<MissionStatus, Lo
 
     Optional<MissionStatus> findByUserAndMission(User user, Mission mission);
 
+    Optional<MissionStatus> findByUserIdAndMissionId(Long userId, Long missionId);
+
 
 }
