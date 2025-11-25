@@ -2,6 +2,7 @@ package com.umc.umc.domain.mission.repository;
 
 import com.umc.umc.domain.mission.dto.AvailableMissionDto;
 import com.umc.umc.domain.mission.entity.Mission;
+import com.umc.umc.domain.store.entity.Store;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,5 +27,7 @@ public interface MissionRepository extends JpaRepository<Mission,Long> {
             @Param("userId") Long userId,
             Pageable pageable
     );
+
+    Page<Mission> findAllByStore(Store store, Pageable pageable);
 }
 

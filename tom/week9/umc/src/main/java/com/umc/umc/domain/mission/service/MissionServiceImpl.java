@@ -19,6 +19,8 @@ import com.umc.umc.domain.user.exception.UserException;
 import com.umc.umc.domain.user.exception.code.UserErrorCode;
 import com.umc.umc.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +65,15 @@ public class MissionServiceImpl implements MissionService {
         MissionStatus savedMissionStatus = missionStatusRepository.save(newMissionStatus);
 
         return missionConverter.toMissionChallengeResponse(savedMissionStatus);
+    }
+
+    public Page<Mission> getMissionList(Long storeId, Integer page) {
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new StoreException(StoreErrorCode.NOT_FOUND));
+
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+
+        return missionRepository.findAllByStore(store, pageRequest);
     }
 
 }

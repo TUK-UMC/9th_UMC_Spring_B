@@ -3,11 +3,16 @@ package com.umc.umc.domain.mission.converter;
 import com.umc.umc.domain.mission.dto.req.MissionCreateReq;
 import com.umc.umc.domain.mission.dto.res.MissionChallengeRes;
 import com.umc.umc.domain.mission.dto.res.MissionCreateRes;
+import com.umc.umc.domain.mission.dto.res.MissionResponseDto;
 import com.umc.umc.domain.mission.entity.Mission;
 import com.umc.umc.domain.mission.entity.MissionStatus;
 import com.umc.umc.domain.store.entity.Store;
 import com.umc.umc.domain.user.entity.User;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MissionConverter {
@@ -43,6 +48,29 @@ public class MissionConverter {
                 missionStatus.getStatus(),
                 missionStatus.getCreateTime()
         );
+    }
+
+    public MissionResponseDto.MissionDto toMissionDto(Mission mission) {
+        return MissionResponseDto.MissionDto.builder()
+                .id(mission.getId())
+                .title(mission.getTitle())
+                .description(mission.getDescription())
+                .createTime(mission.getCreateTime())
+                .build();
+    }
+
+    public MissionResponseDto.MissionListDto toMissionListDto(Page<Mission> missionPage) {
+        List<MissionResponseDto.MissionDto> missionDtoList = missionPage.stream()
+                .map(this::toMissionDto)
+                .collect(Collectors.toList());
+
+        return MissionResponseDto.MissionListDto.builder()
+                .isLast(missionPage.isLast())
+                .isFirst(missionPage.isFirst())
+                .totalPage(missionPage.getTotalPages())
+                .listSize(missionPage.getSize())
+                .missionList(missionDtoList)
+                .build();
     }
 
 }
