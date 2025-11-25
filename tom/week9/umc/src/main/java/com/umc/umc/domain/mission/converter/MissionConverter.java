@@ -73,4 +73,25 @@ public class MissionConverter {
                 .build();
     }
 
+    public MissionResponseDto.OngoingMissionDto toOngoingMissionDto (MissionStatus missionStatus) {
+        return MissionResponseDto.OngoingMissionDto.builder()
+                .missionId(missionStatus.getMission().getId())
+                .title(missionStatus.getMission().getTitle())
+                .description(missionStatus.getMission().getDescription())
+                .status("ONGOING")
+                .completionTime(missionStatus.getMission().getUpdateTime())
+                .build();
+    }
+
+    public MissionResponseDto.OnGoingListDto toOnGoingListDto (Page<MissionResponseDto.OngoingMissionDto> missionPage) {
+
+        return MissionResponseDto.OnGoingListDto.builder()
+                .isLast(missionPage.isLast())
+                .isFirst(missionPage.isFirst())
+                .totalPage(missionPage.getTotalPages())
+                .listSize(missionPage.getSize())
+                .ongoingMissionList(missionPage.getContent())
+                .build();
+    }
+
 }

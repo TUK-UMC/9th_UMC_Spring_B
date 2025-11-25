@@ -60,7 +60,21 @@ public class MissionController {
             return ApiResponse.success(MissionSuccessCode.FOUND, missionConverter.toMissionListDto(missionList));
     }
 
+    @GetMapping("/ongoing")
+    @Operation(summary = "내가 진행 중인 미션 목록 조회 API", description = "내가 도전 중(ONGOING)인 미션들을 조회합니다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+    })
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호 (1 이상)", example = "1")
+    })
+    public ApiResponse<MissionResponseDto.OnGoingListDto> getOngoingMissions(
+            @RequestHeader Long userId,
+            @CheckPage @RequestParam(name = "page") Integer page
+    ) {
+        MissionResponseDto.OnGoingListDto myOngoingMission = missionService.getMyOngoingMission(userId, page);
 
-
+        return ApiResponse.success(MissionSuccessCode.FOUND, myOngoingMission);
+    }
 
 }

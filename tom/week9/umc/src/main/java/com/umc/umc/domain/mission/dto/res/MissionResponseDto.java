@@ -33,4 +33,30 @@ public class MissionResponseDto {
         private Boolean isFirst;
         private Boolean isLast;
     }
+
+    @Builder
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class OngoingMissionDto {
+        private Long missionId;
+        private String title;
+        private String description;
+        private String status;
+        private LocalDateTime completionTime;
+    }
+
+
+    @Builder
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class OnGoingListDto {
+        private List<OngoingMissionDto> ongoingMissionList;
+        private Integer listSize;
+        private Integer totalPage;
+        private Long totalElements;
+        private Boolean isFirst;
+        private Boolean isLast;
+    }
 }

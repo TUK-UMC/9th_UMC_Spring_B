@@ -4,6 +4,7 @@ import com.umc.umc.domain.mission.converter.MissionConverter;
 import com.umc.umc.domain.mission.dto.req.MissionCreateReq;
 import com.umc.umc.domain.mission.dto.res.MissionChallengeRes;
 import com.umc.umc.domain.mission.dto.res.MissionCreateRes;
+import com.umc.umc.domain.mission.dto.res.MissionResponseDto;
 import com.umc.umc.domain.mission.entity.Mission;
 import com.umc.umc.domain.mission.entity.MissionStatus;
 import com.umc.umc.domain.mission.exception.MissionException;
@@ -75,5 +76,20 @@ public class MissionServiceImpl implements MissionService {
 
         return missionRepository.findAllByStore(store, pageRequest);
     }
+
+    @Override
+    public MissionResponseDto.OnGoingListDto getMyOngoingMission(Long userId, Integer page) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserException(UserErrorCode.NOT_FOUND));
+
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+
+        Page<MissionResponseDto.OngoingMissionDto> missionDtoPage
+                = missionStatusRepository.findOngoingMissionsByUserId(user.getId(), "ONGOING", pageRequest);
+
+        return missionConverter.toOnGoingListDto(missionDtoPage);
+
+    }
+
 
 }
