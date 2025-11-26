@@ -16,4 +16,5 @@ public interface ReceivedMissionRepository extends JpaRepository<ReceivedMission
             "ORDER BY rm.deadline DESC")
     Page<ReceivedMission> findActiveOrCompletedMissions(@Param("memberId") Long memberId, Pageable pageable);
 
+    Page<ReceivedMission> findByMemberIdAndStatus(Long memberId, String status, Pageable pageable);
 }

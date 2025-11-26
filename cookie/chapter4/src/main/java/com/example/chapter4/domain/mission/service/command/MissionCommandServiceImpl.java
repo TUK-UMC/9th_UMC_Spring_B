@@ -10,7 +10,9 @@ import com.example.chapter4.domain.mission.entity.ReceivedMission;
 import com.example.chapter4.domain.mission.repository.MissionRepository;
 import com.example.chapter4.domain.mission.repository.ReceivedMissionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,5 +53,9 @@ public class MissionCommandServiceImpl implements MissionCommandService {
 
         // 저장된 도전 미션을 DTO로 변환하여 반환
         return MissionConverter.toChallengeResDTO(saved);
+    }
+
+    public Page<Mission> getMissionsByStore(Long storeId, Pageable pageable) {
+        return null;
     }
 }
