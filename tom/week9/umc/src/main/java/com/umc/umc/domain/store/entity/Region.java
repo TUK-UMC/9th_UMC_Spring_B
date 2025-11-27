@@ -1,0 +1,31 @@
+package com.umc.umc.domain.store.entity;
+
+import com.umc.umc.global.entity.BaseEntity;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+public class Region extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name", nullable = false, length = 20)
+    private String name;
+
+    @OneToMany(mappedBy = "region")
+    private List<Store> stores = new ArrayList<>();
+
+    @Builder
+    public Region(String name) {
+        this.name = name;
+    }
+}
