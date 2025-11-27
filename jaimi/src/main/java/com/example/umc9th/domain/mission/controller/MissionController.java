@@ -1,34 +1,36 @@
 package com.example.umc9th.domain.mission.controller;
 
-import com.example.umc9th.domain.mission.dto.MissionHomeResponseDto;
-import com.example.umc9th.domain.mission.service.MissionService;
-import com.example.umc9th.global.apiPayload.ApiResponse;
-import com.example.umc9th.global.apiPayload.code.GeneralSuccessCode;
+import com.example.umc9th.domain.mission.dto.MissionPreviewListDTO;
+import com.example.umc9th.domain.mission.service.MissionQueryService;
+import com.example.umc9th.global.annotation.ValidPage;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/home")
+@RequestMapping("/missions")
 public class MissionController {
 
-    private final MissionService missionService;
+    private final MissionQueryService MissionQueryService;
 
-    // 홈화면 지역별 미션 조회
-    @GetMapping("/missions")
-    public ApiResponse<List<MissionHomeResponseDto>> getMissionsByRegion(
-            @RequestParam String region,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size
+    // 1. 특정 가게의 미션 목록 조회
+    @GetMapping("/store/{storeId}")
+    @Operation(summary = "특정 가게의 미션 목록 조회")
+    public MissionPreviewListDTO getMissionByStore(
+            @PathVariable Long storeId,
+            @ValidPage @RequestParam Integer page
     ) {
-        List<MissionHomeResponseDto> missions = missionService.getMissionsByRegion(region, page, size);
+        return MissionQueryService.getMissionByStore(storeId, page);
+    }
 
-        // ApiResponse로 감싸서 반환
-        return ApiResponse.<List<MissionHomeResponseDto>>onSuccess(GeneralSuccessCode.MISSION_REGION_LIST_SUCCESS,
-                missions
-        );
-
+    // 2. 내가 진행중인 미션 목록 조회
+    @GetMapping("/me")
+    @Operation(summary = "내가 진행중인 미션 목록 조회")
+    public MissionPreviewListDTO getMyOngoingMission(
+            @ValidPage @RequestParam Integer page
+    ) {
+        Long userId = 1L; // JWT 사용 시 SecurityContext 에서 가져오면 됨
+        return MissionQueryService.getMyOngoingMissions(userId, page);
     }
 }

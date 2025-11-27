@@ -1,38 +1,46 @@
 package com.example.umc9th.domain.review.controller;
 
 import com.example.umc9th.domain.review.dto.ReviewResponseDto;
+import com.example.umc9th.domain.review.entity.Review;
+import com.example.umc9th.domain.review.exception.code.ReviewSuccessCode;
 import com.example.umc9th.domain.review.service.ReviewService;
+import com.example.umc9th.domain.review.service.query.ReviewQueryService;
 import com.example.umc9th.global.apiPayload.ApiResponse;
-import com.example.umc9th.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
- // ReviewController
- // HTTP 요청을 받아서 Service에 전달
- // JSON 형태로 응답 반환
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/reviews")
-public class ReviewController {
+public class ReviewController implements ReviewControllerDocs{
 
-    private final ReviewService reviewService;
-    // [내가 작성한 리뷰 보기 API]
-    //필터링 조건: 가게명, 별점대
-     // 예시: /api/reviews/my?userId=1&storeName=반이학생마라탕마라반&starRange=4
+    private final ReviewQueryService reviewQueryService;
 
-    @GetMapping("/my")
-    public ApiResponse<List<ReviewResponseDto>> getMyReviews(
-            @RequestParam Long userId,
-            @RequestParam(required = false) String storeName,
-            @RequestParam(required = false) Integer starRange
-    ) {
-        List<ReviewResponseDto> reviews = reviewService.getMyReviews(userId, storeName, starRange);
+    @GetMapping("/reviews/search")
+    public List<Review> searchReview(
+            @RequestParam String filter,
+            @RequestParam String type
+    ) throws Exception{
 
-        return ApiResponse.onSuccess(
-                GeneralSuccessCode.REVIEW_LIST_SUCCESS,
-                reviews);
+        // 서비스에게 요청
+        List<Review> result = reviewQueryService.searchReview(filter, type);
+        return result;
+    }
 
+    // 가게의 리뷰 목록 조회
+    @Override
+    @GetMapping("/reviews")
+    public ApiResponse<ReviewResponseDto.ReviewPreViewListDTO> getReviews(
+        @RequestParam String storeName,
+        @RequestParam(defaultValue = "1") Integer page
+    ){
+            ReviewSuccessCode code = ReviewSuccessCode.REVIEW_FOUND;
+
+            ReviewResponseDto.ReviewPreViewListDTO result = null;
+
+            return ApiResponse.onSuccess(code, reviewQueryService.findReview(storeName, page));
     }
 }

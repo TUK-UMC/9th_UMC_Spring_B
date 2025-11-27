@@ -1,34 +1,36 @@
 package com.example.umc9th.domain.mission.service;
 
-import com.example.umc9th.domain.mission.dto.MissionHomeResponseDto;
-import com.example.umc9th.domain.mission.entity.Mission;
+import com.example.umc9th.domain.mission.entity.PersonalMission;
 import com.example.umc9th.domain.mission.repository.MissionRepository;
+import com.example.umc9th.domain.mission.repository.PersonalMissionRepository;
+import com.example.umc9th.domain.user.entity.user;
+import com.example.umc9th.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class MissionService {
 
+    private final UserRepository userRepository;
     private final MissionRepository missionRepository;
+    private final PersonalMissionRepository personalMissionRepository;
 
-    public List<MissionHomeResponseDto> getMissionsByRegion(String region, int page, int size) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        Page<Mission> missions = missionRepository.findMissionsByRegion(region, pageRequest);
+    public void challengeMission(Long missionId) {
 
-        return missions.stream()
-                .map(m -> new MissionHomeResponseDto(
-                        m.getStore().getName(),
-                        m.getStore().getAddress(),
-                        m.getMissionExplain(),
-                        m.getMissionAward()
-                ))
-                .collect(Collectors.toList());
+        user user = userRepository.findById(1L)
+                .orElseThrow(() -> new RuntimeException("사용자 없음"));
+
+        mission mission = missionRepository.findById(missionId)
+                .orElseThrow(() -> new RuntimeException("미션 없음"));
+
+        PersonalMission pm = PersonalMission.builder()
+                .user(user)
+                .mission(mission)
+                .time(0)
+                .build();
+
+        personalMissionRepository.save(pm);
     }
+
 }
