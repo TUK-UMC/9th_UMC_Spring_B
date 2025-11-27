@@ -25,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService{
 
+    private static final int PAGE_SIZE = 10;
+
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final ReviewConverter reviewConverter;
@@ -58,7 +60,7 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserException(UserErrorCode.NOT_FOUND));
 
-        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+        PageRequest pageRequest = PageRequest.of(page - 1, PAGE_SIZE);
 
         Page<Review> reviewPage = reviewRepository.findAllByUser(user, pageRequest);
 

@@ -30,6 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MissionServiceImpl implements MissionService {
 
+    private static final int PAGE_SIZE = 10;
+
     private final MissionRepository missionRepository;
     private final StoreRepository storeRepository;
     private final UserRepository userRepository;
@@ -72,7 +74,7 @@ public class MissionServiceImpl implements MissionService {
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new StoreException(StoreErrorCode.NOT_FOUND));
 
-        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+        PageRequest pageRequest = PageRequest.of(page - 1, PAGE_SIZE);
 
         return missionRepository.findAllByStore(store, pageRequest);
     }
@@ -82,7 +84,7 @@ public class MissionServiceImpl implements MissionService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserException(UserErrorCode.NOT_FOUND));
 
-        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+        PageRequest pageRequest = PageRequest.of(page - 1, PAGE_SIZE);
 
         Page<MissionResponseDto.OngoingMissionDto> missionDtoPage
                 = missionStatusRepository.findOngoingMissionsByUserId(user.getId(), "ONGOING", pageRequest);
