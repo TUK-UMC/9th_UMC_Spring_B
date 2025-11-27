@@ -23,6 +23,7 @@ public enum GeneralSuccessCode implements BaseSuccessCode {
 
     // 리뷰
     REVIEW_LIST_SUCCESS(HttpStatus.OK, "S301", "리뷰 목록 조회에 성공했습니다."),
+    REVIEW_CREATE_SUCCESS(HttpStatus.OK, "S302", "리뷰가 성공적으로 등록되었습니다."),
 
     // 가게
     STORE_LIST_SUCCESS(HttpStatus.OK, "S401", "가게 목록 조회에 성공했습니다.");
