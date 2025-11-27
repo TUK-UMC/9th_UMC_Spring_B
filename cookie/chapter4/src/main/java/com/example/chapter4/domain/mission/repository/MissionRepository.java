@@ -15,4 +15,5 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
             "ORDER BY m.id DESC")
     Page<Mission> findMissionsByAreaId(@Param("areaId") Long areaId, Pageable pageable);
 
+    Page<Mission> findByStoreId(Long storeId, Pageable pageable);
 }
