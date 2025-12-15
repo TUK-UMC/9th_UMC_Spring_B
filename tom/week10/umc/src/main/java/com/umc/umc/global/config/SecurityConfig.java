@@ -48,10 +48,14 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            response.setStatus(200);
+                            response.setContentType("application/json");
+                            response.setCharacterEncoding("UTF-8");
+                            response.getWriter().write("{\"isSuccess\": true, \"message\": \"로그아웃 성공\"}");
+                        })
                         .permitAll()
-                )
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(authenticationEntryPoint()));
+                );
 
         return http.build();
     }

@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService{
                 .orElseThrow(() -> new UserException(UserErrorCode.NOT_FOUND));
 
         // 비밀번호 검증
-        if (!passwordEncoder.matches(dto.password(), user.getPassword())){
+        if (!passwordEncoder.matches(dto.password(), user.getPassword())) {
             throw new UserException(UserErrorCode.INVALID);
         }
 
