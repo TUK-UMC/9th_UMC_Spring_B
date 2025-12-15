@@ -5,6 +5,7 @@ import com.umc.umc.domain.review.entity.Review;
 import com.umc.umc.domain.review.repository.ReviewRepository;
 import com.umc.umc.domain.user.converter.UserConverter;
 import com.umc.umc.domain.review.dto.MyReviewDto;
+import com.umc.umc.domain.user.dto.CustomUserDetails;
 import com.umc.umc.domain.user.dto.MyReviewSearchCond;
 import com.umc.umc.domain.user.dto.req.UserReqDto;
 import com.umc.umc.domain.user.dto.res.UserResDto;
@@ -14,6 +15,8 @@ import com.umc.umc.domain.user.exception.UserException;
 import com.umc.umc.domain.user.exception.code.UserErrorCode;
 import com.umc.umc.domain.user.repository.UserRepository;
 import com.umc.umc.global.apiPayload.code.GeneralErrorCode;
+import com.umc.umc.global.auth.jwt.JwtUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +36,8 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final ReviewConverter reviewConverter;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
+    private final UserConverter userConverter;
 
     @Transactional(readOnly = true)
     public Page<MyReviewDto> getMyReviews(Long userId, MyReviewSearchCond cond,  Pageable pageable) {
@@ -70,4 +75,28 @@ public class UserServiceImpl implements UserService{
 
         return reviewConverter.toReviewListDto(reviewPage);
     }
+
+    @Override
+    public UserResDto.LoginDto login(
+            UserReqDto.@Valid LoginDto dto) {
+        // Member 조회
+        User user = userRepository.findByEmail(dto.email())
+                .orElseThrow(() -> new UserException(UserErrorCode.NOT_FOUND));
+
+        // 비밀번호 검증
+        if (!passwordEncoder.matches(dto.password(), user.getPassword())){
+            throw new UserException(UserErrorCode.INVALID);
+        }
+
+        // JWT 토큰 발급용 UserDetails
+        CustomUserDetails userDetails = new CustomUserDetails(user);
+
+        // 엑세스 토큰 발급
+        String accessToken = jwtUtil.createAccessToken(userDetails);
+
+        // DTO 조립
+        return userConverter.toLoginDTO(user, accessToken);
+    }
+
+
 }

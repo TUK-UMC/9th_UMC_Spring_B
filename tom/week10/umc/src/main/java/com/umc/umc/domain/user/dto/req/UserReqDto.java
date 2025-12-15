@@ -1,6 +1,7 @@
 package com.umc.umc.domain.user.dto.req;
 
 import com.umc.umc.domain.user.enums.Gender;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -27,4 +28,15 @@ public class UserReqDto {
             this.address = address;
             this.phoneNumber = phoneNumber;
         }
+
+        public record LoginDto(
+                @NotBlank
+                String email,
+                @NotBlank
+                String password) {
+        }
+
+
 }
+
+

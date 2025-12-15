@@ -5,6 +5,7 @@ import com.umc.umc.domain.review.dto.MyReviewDto;
 import com.umc.umc.domain.user.dto.MyReviewSearchCond;
 import com.umc.umc.domain.user.dto.req.UserReqDto;
 import com.umc.umc.domain.user.dto.res.UserResDto;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,4 +18,6 @@ public interface UserService {
     );
 
     MyReviewDto.ReviewListDto getMyReviews(Long userId, Integer page);
+
+    UserResDto.LoginDto login(UserReqDto.@Valid LoginDto dto);
 }

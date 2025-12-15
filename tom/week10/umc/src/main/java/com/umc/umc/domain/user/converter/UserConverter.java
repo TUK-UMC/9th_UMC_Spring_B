@@ -38,5 +38,13 @@ public class UserConverter {
                 .build();
     }
 
-
+    public static UserResDto.LoginDto toLoginDTO(
+            User user,
+            String accessToken
+    ) {
+        return new  UserResDto.LoginDto(
+                user.getId(),
+                accessToken
+        );
+    }
 }
