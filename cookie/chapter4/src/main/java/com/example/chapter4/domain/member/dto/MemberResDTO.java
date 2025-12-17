@@ -13,4 +13,9 @@ public class MemberResDTO {
         public Long getMemberId() { return memberId; }
         public String getCreateAt() { return createAt; }
     }
+    @Builder
+    public record LoginDTO(
+            Long memberId,
+            String accessToken
+    ){}
 }

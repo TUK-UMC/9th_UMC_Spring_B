@@ -1,6 +1,7 @@
 package com.example.chapter4.domain.member.entity;
 
 import com.example.chapter4.domain.Alarm.entity.Alarm;
+import com.example.chapter4.global.auth.enums.Role;
 import com.example.chapter4.global.entity.BaseEntity;
 import com.example.chapter4.domain.mission.entity.ReceivedMission;
 import com.example.chapter4.domain.review.entity.Review;
@@ -19,13 +20,19 @@ import java.util.List;
 @AllArgsConstructor // Lombok: 모든 필드를 인자로 받는 생성자를 생성합니다.
 
 public class Member extends BaseEntity {
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @Id // 이 필드가 테이블의 기본 키(PK)임을 나타냅니다.
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 데이터베이스에 위임합니다. (e.g., MySQL의 AUTO_INCREMENT)
     private Long id;
-
-    @Column(nullable = false, length = 20) // 데이터베이스 컬럼에 매핑됩니다. nullable=false는 NOT NULL 제약조건을 의미합니다.
-    private String email;
 
     @Column(length = 10)
     private String provider; // 소셜 로그인 제공자 (e.g., "kakao", "google")
