@@ -1,12 +1,13 @@
 package com.example.umc9th.global.apiPayload.handler;
 
-import com.example.umc9th.global.apiPayload.ApiResponse;
+import com.example.umc9th.global.apiPayload.code.ApiResponse;
 import com.example.umc9th.global.apiPayload.code.BaseErrorCode;
 import com.example.umc9th.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc9th.global.exception.GeneralException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.example.umc9th.global.exception.PageException;
 
 @RestControllerAdvice
 public class GeneralExceptionAdvice {
@@ -38,5 +39,14 @@ public class GeneralExceptionAdvice {
                                 ex.getMessage()
                         )
                 );
+    }
+    @ExceptionHandler(PageException.class)
+    public ResponseEntity<ApiResponse<Void>> handlePageException(PageException ex) {
+
+        return ResponseEntity.status(ex.getCode().getStatus())
+                .body(ApiResponse.onFailure(
+                        ex.getCode(),
+                        null
+                ));
     }
 }

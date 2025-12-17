@@ -7,4 +7,8 @@ public interface BaseErrorCode {
     HttpStatus getStatus();
     String getCode();
     String getMessage();
+
+    ReasonDTO getReason();
+
+    ReasonDTO getReasonHttpStatus();
 }

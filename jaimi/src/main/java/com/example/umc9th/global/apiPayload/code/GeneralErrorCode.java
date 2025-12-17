@@ -48,12 +48,11 @@ public enum GeneralErrorCode implements BaseErrorCode{
             "허용되지 않은 HTTP 메서드입니다."),
 
     // 500 Internal Server Error
-    // 서버 내부 오류 (예상치 못한 에러) 공통 코드 -> GeneralExceptionAdvice에서 사용
+    // 서버 내부 오류 (예상치 못한 에러) 공통 코드
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR,
             "COMMON500_1",
             "서버 내부 오류가 발생했습니다."),
 
-    // === 도메인별 에러 코드 (필요시 추가) === //
 
     // Mission 관련
     MISSION_NOT_FOUND(HttpStatus.NOT_FOUND,
@@ -75,7 +74,31 @@ public enum GeneralErrorCode implements BaseErrorCode{
     // stauts : HTTP 응답 코드
     // code : 내부적으로 세부 구분을 위한 에러 식별 코드
     // message : 클라인언트(사용자)에게 전달할 에러 설명 문구
-    private final HttpStatus status;
+    private final HttpStatus httpStatus;
     private final String code;
     private final String message;
+
+    @Override
+    public ReasonDTO getReason() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(false)
+                .build();
+    }
+
+    @Override
+    public ReasonDTO getReasonHttpStatus() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(false)
+                .httpStatus(httpStatus)
+                .build();
+    }
+
+    @Override
+    public HttpStatus getStatus() {
+        return httpStatus;
+    }
 }
