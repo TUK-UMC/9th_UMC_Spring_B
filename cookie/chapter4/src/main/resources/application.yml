@@ -1,6 +1,11 @@
 spring:
   application:
     name: "chapter4"
+jwt:
+  token:
+    secretKey: chapter4-secret-key-min-256-bits-long-secret-key-for-hs256-algorithm-should-be-very-long-string
+    expiration:
+      access: 3600000
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver # MySQL JDBC ???? ??? ??

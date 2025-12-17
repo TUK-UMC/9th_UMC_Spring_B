@@ -1,5 +1,6 @@
 package com.example.chapter4.domain.review.controller;
 
+import com.example.chapter4.annotation.ValidPage;
 import com.example.chapter4.domain.review.dto.MyReviewDto;
 import com.example.chapter4.domain.review.dto.ReviewReqDTO;
 import com.example.chapter4.domain.review.dto.ReviewResDTO;
