@@ -3,7 +3,7 @@ package com.example.umc9th.global.exception;
 import com.example.umc9th.global.apiPayload.code.BaseErrorCode;
 import lombok.Getter;
 
-// 사용자 정의 예외 클래스 ErrorCode를 포함하여 구체적인 에러 정보를 전달
+
 @Getter
 public class GeneralException extends RuntimeException {
 

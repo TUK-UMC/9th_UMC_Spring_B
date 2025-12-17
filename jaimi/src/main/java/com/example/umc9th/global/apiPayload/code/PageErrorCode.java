@@ -13,4 +13,28 @@ public enum PageErrorCode implements BaseErrorCode {
     private final HttpStatus status;
     private final String code;
     private final String message;
+
+    @Override
+    public ReasonDTO getReason() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(false)
+                .build();
+    }
+
+    @Override
+    public ReasonDTO getReasonHttpStatus() {
+        return ReasonDTO.builder()
+                .message(message)
+                .code(code)
+                .isSuccess(false)
+                .httpStatus(status)
+                .build();
+    }
+
+    @Override
+    public HttpStatus getStatus() {
+        return status;
+    }
 }
