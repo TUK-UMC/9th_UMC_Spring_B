@@ -8,7 +8,6 @@ import com.example.umc9th.domain.member.dto.MemberResDTO;
 public interface MemberCommandService {
 
     // 회원가입 메서드 정의
-    MemberResDTO.JoinResultDTO joinMember(
-            MemberReqDTO.JoinDTO dto
-    );
+    MemberResDTO.JoinResultDTO joinMember(MemberReqDTO.JoinDTO request);
+    MemberResDTO.LoginDTO login(MemberReqDTO.LoginDTO request);
 }

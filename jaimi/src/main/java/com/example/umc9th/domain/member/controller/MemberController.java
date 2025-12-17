@@ -26,10 +26,14 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<MemberResDTO.LoginDTO> login(
-            @RequestBody @Valid MemberReqDTO.LoginDTO dto
-    ){
-        return ApiResponse.onSuccess(MemberSuccessCode.FOUND, memberQueryService.login(dto));
+    public ApiResponse<MemberResDTO.LoginDTO> login(@RequestBody @Valid MemberReqDTO.LoginDTO request){
+        MemberResDTO.LoginDTO result = memberCommandService.login(request);
+        return ApiResponse.onSuccess(result);
     }
 
+    @PostMapping("/logout")
+    public ApiResponse<String> logout() {
+        return ApiResponse.onSuccess("로그아웃 성공!");
+    }
 }
+

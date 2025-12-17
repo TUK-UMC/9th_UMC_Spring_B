@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 public class MemberResDTO {
+
     @Builder
     @Getter
     @NoArgsConstructor
@@ -23,6 +24,8 @@ public class MemberResDTO {
     @AllArgsConstructor
     public static class LoginDTO {
         Long memberId;
-        String email;
+        String accessToken;
     }
+
+
 }

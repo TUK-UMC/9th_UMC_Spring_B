@@ -20,13 +20,6 @@ public class MemberConverter {
                 .detailAddress(request.specAddress())
                 .build();
     }
-    
-    public static MemberResDTO.LoginDTO toLoginDTO(Member member) {
-        return MemberResDTO.LoginDTO.builder()
-                .memberId(member.getId())
-                .email(member.getEmail())
-                .build();
-    }
 
     // 회원가입 응답용
     public static MemberResDTO.JoinResultDTO toJoinResultDTO(Member member){
